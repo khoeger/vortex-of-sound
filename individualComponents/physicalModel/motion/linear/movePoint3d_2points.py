@@ -24,49 +24,55 @@ if s.shape[0]==1:
 else:
     start = s
 
-# deltaX = (endX - startX)/steps
-# deltaY = (endY - startY)/steps
-# deltaZ = (endZ - startZ)/steps
-#
-# def move(points, x, y, z, c):#, z,c):
-#     n = len(points)
-#     print(n)
-#     xmove = c*x*np.ones(n)
-#     print("c",c)
-#     print("x",x)
-#     print("xmove", len(xmove), xmove)
-#     ymove = c*y*np.ones(n)
-#     zmove = c*z*np.ones(n)
-#     m = np.array([xmove, ymove, zmove]).transpose()
-#     #move = np.array([xmove, ymove]).transpose()
-#     print("points",points)
-#     print("m",m)
-#     out = points + m
-#     return(out)
-# #print(move(start,deltaX,deltaY,deltaZ,1))
-#
-# rewinds = 4
-# print("---\nInitial Position\n---")
-#
-# initialPos = move(start, deltaX,deltaY,deltaZ,1)
-# #initialPos = move(start, deltaX,deltaY,1)
-#
-# print("---\nGraph Points\n---")
-# #-- Generate all steps
-#
-# graphPoints = np.fromfunction(
-#                                 lambda i,j:
-#                                 move(   np.array(initialPos),
-#                                         deltaX,
-#                                         deltaY,
-#                                         deltaZ,
-#                                         1),
-#                                 (steps,1),
-#                                 dtype=int
-#                                 )
-# #graphPoints = graphPoints[0]
-# print("Graph Points", graphPoints)
-# print(graphPoints[:,0])
+deltaX = (endX - startX)/steps
+deltaY = (endY - startY)/steps
+deltaZ = (endZ - startZ)/steps
+
+def move(points, x, y, z, c):#, z,c):
+    n = len(points)
+    #print(n)
+    xmove = c*x*np.ones(n)
+    #print("c",c)
+    #print("x",x)
+    #print("xmove", len(xmove), xmove)
+    ymove = c*y*np.ones(n)
+    zmove = c*z*np.ones(n)
+    m = np.array([xmove, ymove, zmove]).transpose()
+    #move = np.array([xmove, ymove]).transpose()
+    print("points",points)
+    print("dim points", points.shape)
+    print("m",m)
+    print("dim m", m.shape)
+    out = points + m
+
+    return(out)
+#print(move(start,deltaX,deltaY,deltaZ,1))
+
+rewinds = 4
+
+print("---\nInitial Position\n---")
+initialPos = move(start, deltaX,deltaY,deltaZ,1)
+#initialPos = move(start, deltaX,deltaY,1)
+print(initialPos)
+
+print("---\nGraph Points\n---")
+#-- Generate all steps
+
+graphPoints = np.fromfunction(
+                                lambda i,j:
+                                move(   np.array(initialPos),
+                                        deltaX,
+                                        deltaY,
+                                        deltaZ,
+                                        i),
+                                (steps,2),
+                                dtype=int
+                                )
+
+print("Graph Points")
+print(len(graphPoints))
+#print(graphPoints[:,0])
+print(graphPoints)
 #
 # fig = plt.figure()
 # ax = fig.add_subplot(111,
