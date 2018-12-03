@@ -38,13 +38,24 @@ def move(points, x, y, z, c):#, z,c):
     ymove = c*y*np.ones(n)
     zmove = c*z*np.ones(n)
     m = np.array([xmove, ymove, zmove]).transpose()
-    #move = np.array([xmove, ymove]).transpose()
-    print("points",points)
-    print("dim points", points.shape)
-    print("m",m)
-    print("dim m", m.shape)
-    out = points + m
 
+    pointArray = np.array(
+        [
+            np.full(    (   points.shape[0], points.shape[1]),
+                        points[point]   )
+                    for point in range(points.shape[0])
+        ]
+    )
+    #move = np.array([xmove, ymove]).transpose()
+    print("points\n",points)
+    print("dim points:", points.shape,"\n\n")
+    print("points array\n",pointArray)
+    print("dim points array:", pointArray.shape,"\n\n")
+    print("m\n",m)
+    print("dim m:", m.shape,"\n\n")
+    out = pointArray + m
+    print("out\n", out)
+    print("dim out:", out.shape,"\n\n")
     return(out)
 #print(move(start,deltaX,deltaY,deltaZ,1))
 
@@ -59,18 +70,18 @@ print("---\nGraph Points\n---")
 #-- Generate all steps
 
 graphPoints = np.fromfunction(
-                                lambda i,j:
+                                lambda i,j,k:
                                 move(   np.array(initialPos),
                                         deltaX,
                                         deltaY,
                                         deltaZ,
-                                        i),
-                                (steps,2),
+                                        j),
+                                (2,steps,3),
                                 dtype=int
                                 )
 
 print("Graph Points")
-print(len(graphPoints))
+#print(len(graphPoints))
 #print(graphPoints[:,0])
 print(graphPoints)
 #
