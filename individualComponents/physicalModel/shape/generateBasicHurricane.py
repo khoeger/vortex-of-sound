@@ -37,7 +37,7 @@ ax.set_zlim3d(bottom=0,top=15)
 ax.relim()
 ax.scatter( coordsT[:,0],#x ,
             coordsT[:,1],#y,
-            coordsT[:,2],#z ,
+            coordsT[:,2],#z 
             c = "xkcd:coral",
             marker = "o")
 plt.show()
