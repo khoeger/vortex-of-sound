@@ -25,10 +25,8 @@ x = hurricaneEqns.polarToX(rs, thetas)
 y = hurricaneEqns.polarToY(rs, thetas)
 z = heights
 coords = np.array([x,y,z])
-
-print(x[:10])
-print(y[:10])
-print(z[:10])
+#Transpose!
+coordsT = coords.transpose()
 
 # -- Plot
 fig = plt.figure()
@@ -43,9 +41,9 @@ ax.set_zlim3d(bottom=0,top=15)
 ax.relim()
 #ax = fig.add_subplot(111)
 #ax.scatter(coords[0], coords[1],c="r",marker="o")
-ax.scatter( coords[0],#x ,
-            coords[1],#y,#np.zeros(n) ,
-            coords[2],#z ,
+ax.scatter( coordsT[:,0],#x ,
+            coordsT[:,1],#y,#np.zeros(n) ,
+            coordsT[:,2],#z ,
             c = "xkcd:coral",
             marker = "o")
 plt.show()
