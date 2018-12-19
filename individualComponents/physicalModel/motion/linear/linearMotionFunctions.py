@@ -8,7 +8,7 @@ def moveSinglePoint2D(points, x, y,c):
     out = points + move
     return(out)
 
-def moveSinglePoint3d(points, x, y, z, c):
+def moveSinglePoint3D(points, x, y, z, c):
     n = len(points)
     xmove = c*x*np.ones(n)
     ymove = c*y*np.ones(n)
