@@ -8,12 +8,12 @@ stepsPS = 100                   # steps per second
 steps = songLength*stepsPS      # total number of steps
 intervalM = songLength/steps    # seconds per step
 
-startX = -100
+startX = -100                   # move from startX, startY -> endX, endY
 endX = 100
 startY = -100
 endY = 100
 
-s = np.array([startX,startY])
+s = np.array([startX,startY])       # starting point
 start = np.reshape(s,(1,len(s)))
 
 deltaX = (endX - startX)/steps
@@ -27,10 +27,7 @@ def move(points, x, y,c):
     out = points + move
     return(out)
 
-
-rewinds = 4
 initialPos = move(start, deltaX,deltaY,1)
-
 
 #-- Generate all steps
 
