@@ -61,7 +61,6 @@ ax = fig.add_subplot(111,
                     ylim=(startY,endY))
 ax.grid()
 line, = ax.plot([],[],'o-',lw=2,c='xkcd:coral')
-#time_template = 'time = %.1fs'
 
 def init():
     line.set_data([], [])
