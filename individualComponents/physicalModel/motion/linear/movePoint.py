@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 """ Move a point, 2D """
-songLength = 60*4           #seconds
-stepsPS = 100               # steps per second
-steps = songLength*stepsPS
-intervalM = songLength/steps
+songLength = 60*4+10            # piece length in seconds
+stepsPS = 100                   # steps per second
+steps = songLength*stepsPS      # total number of steps
+intervalM = songLength/steps    # seconds per step
 
 startX = -100
 endX = 100
