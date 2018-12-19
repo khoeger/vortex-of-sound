@@ -20,8 +20,8 @@ endZ = 9
 steps = songLength*stepsPS          # total number of steps
 intervalM = songLength/steps        # seconds per step
 
-s = np.array([startX,startY,startZ]) # starting point
-start = np.reshape(s,(1,len(s)))
+s = np.array([startX,startY,startZ]) # starting point, shape (3,)
+start = np.reshape(s,(1,len(s)))     #shape (1, 3)
 
 deltaX = (endX - startX)/steps      # change in X per step
 deltaY = (endY - startY)/steps      # change in Y per step
@@ -42,6 +42,7 @@ graphPoints = np.fromfunction(
                                 (steps,1),
                                 dtype=int
                                 )
+print(graphPoints.shape)        # Graphpoints Shape: (1,steps, 3)
 graphPoints = graphPoints[0]
 
 fig = plt.figure()

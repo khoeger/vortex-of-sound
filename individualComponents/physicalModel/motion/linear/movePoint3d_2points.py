@@ -4,29 +4,33 @@ import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
 
 """ Move a point, 2D """
-songLength = 1#60*4 #seconds
-stepsPS = 10 # steps per second
-steps = songLength*stepsPS
-intervalM = songLength/steps
 
-startX = -100
+#-- Variables
+songLength = 60*4 +10 # piece length in seconds
+stepsPS = 100         # steps per second
+
+startX = -100         # move from start(X,Y,Z) --> end(X,Y,X)
 endX = 50
 startY = -100
 endY = 100
 startZ =4
 endZ = 9
 
-s = np.array([  [startX,    startY,     startZ]     ,
-                [2*startX,  2*startY,   2*startZ]   ])#,0])
+#-- Initial Calculations
+steps = songLength*stepsPS      # total number of steps
+intervalM = songLength/steps    # seconds per step
 
+deltaX = (endX - startX)/steps      # change in X per step
+deltaY = (endY - startY)/steps      # change in Y per step
+deltaZ = (endZ - startZ)/steps      # change in Z per step
+
+s = np.array([  [startX,    startY,     startZ]     , # starting point
+                [2*startX,  2*startY,   2*startZ]   ])# shape: (2,3)
+print(s.shape)
 if s.shape[0]==1:
     start = np.reshape(s,(1,s.shape[1]))
 else:
     start = s
-
-deltaX = (endX - startX)/steps
-deltaY = (endY - startY)/steps
-deltaZ = (endZ - startZ)/steps
 
 def move(points, x, y, z, c):#, z,c):
     n = len(points)
@@ -65,7 +69,7 @@ print("---\nInitial Position\n---")
 initialPos = move(start, deltaX,deltaY,deltaZ,1)
 #initialPos = move(start, deltaX,deltaY,1)
 print(initialPos)
-
+"""
 print("---\nGraph Points\n---")
 #-- Generate all steps
 
@@ -120,3 +124,4 @@ print(graphPoints)
 # #ani.to_html5_video(embed_limit=None)
 # #ani.save("movingPoint.mp4")
 # plt.show()
+"""
