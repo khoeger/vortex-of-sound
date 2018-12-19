@@ -2,49 +2,39 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from mpl_toolkits.mplot3d import Axes3D
+from linearMotionFunctions import moveSinglePoint3D as moveSinglePoint
 
 """ Move a point, 2D """
-songLength = 60*4 #seconds
-stepsPS = 10 # steps per second
-steps = songLength*stepsPS
-intervalM = songLength/steps
+#-- Variables
+songLength = 60*4+10    # piece length in seconds
+stepsPS = 100           # steps per second
 
-startX = -100
+startX = -100           # move from startX, startY, startZ -> endX, endY, endZ
 endX = 50
 startY = -100
 endY = 100
 startZ =1
 endZ = 9
 
-s = np.array([startX,startY,startZ])#,0])
+#-- Initial Calculations
+steps = songLength*stepsPS          # total number of steps
+intervalM = songLength/steps        # seconds per step
+
+s = np.array([startX,startY,startZ]) # starting point
 start = np.reshape(s,(1,len(s)))
 
-deltaX = (endX - startX)/steps
-deltaY = (endY - startY)/steps
-deltaZ = (endZ - startZ)/steps
+deltaX = (endX - startX)/steps      # change in X per step
+deltaY = (endY - startY)/steps      # change in Y per step
+deltaZ = (endZ - startZ)/steps      # change in Z per step
 
-def move(points, x, y, z, c):#, z,c):
-    n = len(points)
-    xmove = c*x*np.ones(n)
-    ymove = c*y*np.ones(n)
-    zmove = c*z*np.ones(n)
-    move = np.array([xmove, ymove, zmove]).transpose()
-    #move = np.array([xmove, ymove]).transpose()
-    out = points + move
-    return(out)
-
-
-rewinds = 4
-
-initialPos = move(start, deltaX,deltaY,deltaZ,1)
-#initialPos = move(start, deltaX,deltaY,1)
-
+# Initial Position
+initialPos = moveSinglePoint(start, deltaX,deltaY,deltaZ,1)
 
 #-- Generate all steps
 
 graphPoints = np.fromfunction(
                                 lambda i,j:
-                                move(   np.array(initialPos),
+                                moveSinglePoint(   np.array(initialPos),
                                         deltaX,
                                         deltaY,
                                         deltaZ,
@@ -63,21 +53,18 @@ ax = fig.add_subplot(111,
                     projection='3d')
 ax.grid()
 line, = ax.plot([],[],[],'o',lw=2,c='xkcd:coral')
-#time_template = 'time = %.1fs'
-#time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 def init():
     line.set_data([],[])
     line.set_3d_properties([])
-    #time_text.set_text('')
     return line, #time_text
 
 def animate(i):
     pointI = graphPoints[i]
     line.set_data(pointI[0],pointI[1])
     line.set_3d_properties(pointI[2])
-    #time_text.set_text(time_template % (i*intervalM))
     return line, #time_text
+
 ani = animation.FuncAnimation(  fig, animate, np.arange(1,len(graphPoints)),
                                 interval=intervalM,#intervalM*0.0002,
                                 blit=True, init_func=init)
