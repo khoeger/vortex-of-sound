@@ -39,8 +39,18 @@ graphPoints = np.fromfunction(
                                         i),
                                 (steps,1),
                                 dtype=int
-                                )
-graphPoints = graphPoints[0]
+                                ) # graphPoints takes the function
+                                  # moveSinglePoint and applies it over each
+                                  # (i, j) pair over a shape (steps,1), where
+                                  # the output becomes (1,steps,2). The 1 comes
+                                  # from (steps, 1) and the 2 comes from
+                                  # initialPosition's dimension (1,2)
+
+graphPoints = graphPoints[0]      # For graphing purposes, and easy manipulation
+                                  # Isolate's the column of steps
+print(initialPos, initialPos.shape)
+print(graphPoints.shape)
+print(graphPoints[:10])
 
 fig = plt.figure()
 ax = fig.add_subplot(111,
