@@ -4,21 +4,28 @@ import matplotlib.animation as animation
 from linearMotionFunctions import moveSinglePoint
 
 """ Move a point, 2D """
+
+#-- Variables
 songLength = 60*4+10            # piece length in seconds
 stepsPS = 100                   # steps per second
-steps = songLength*stepsPS      # total number of steps
-intervalM = songLength/steps    # seconds per step
 
 startX = -100                   # move from startX, startY -> endX, endY
 endX = 100
 startY = -100
 endY = 100
 
+#-- Initial Calculations
+steps = songLength*stepsPS          # total number of steps
+intervalM = songLength/steps        # seconds per step
+
 s = np.array([startX,startY])       # starting point
 start = np.reshape(s,(1,len(s)))
 
 deltaX = (endX - startX)/steps      # change in X per step
 deltaY = (endY - startY)/steps      # change in Y per step
+
+
+#-- Move to start
 
 initialPos = moveSinglePoint(start, deltaX,deltaY,1)
 
