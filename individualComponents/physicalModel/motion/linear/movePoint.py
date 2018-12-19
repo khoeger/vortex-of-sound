@@ -48,9 +48,11 @@ graphPoints = np.fromfunction(
 
 graphPoints = graphPoints[0]      # For graphing purposes, and easy manipulation
                                   # Isolate's the column of steps
+"""
 print(initialPos, initialPos.shape)
 print(graphPoints.shape)
 print(graphPoints[:10])
+"""
 
 fig = plt.figure()
 ax = fig.add_subplot(111,
@@ -59,7 +61,7 @@ ax = fig.add_subplot(111,
                     ylim=(startY,endY))
 ax.grid()
 line, = ax.plot([],[],'o-',lw=2,c='xkcd:coral')
-time_template = 'time = %.1fs'
+#time_template = 'time = %.1fs'
 
 def init():
     line.set_data([], [])
@@ -69,7 +71,11 @@ def animate(i):
     pointI = graphPoints[i]
     line.set_data(pointI[0],pointI[1])
     return line,
-ani = animation.FuncAnimation(  fig, animate, np.arange(1,len(graphPoints)),
+
+ani = animation.FuncAnimation(  fig,
+                                animate,
+                                np.arange(1,len(graphPoints)),
                                 interval=intervalM,
-                                blit=True, init_func=init)
+                                blit=True,
+                                init_func=init)
 plt.show()
