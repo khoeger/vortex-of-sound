@@ -16,8 +16,8 @@ endY = 100
 s = np.array([startX,startY])       # starting point
 start = np.reshape(s,(1,len(s)))
 
-deltaX = (endX - startX)/steps
-deltaY = (endY - startY)/steps
+deltaX = (endX - startX)/steps      # change in X per step
+deltaY = (endY - startY)/steps      # change in Y per step
 
 def move(points, x, y,c):
     n = len(points)
