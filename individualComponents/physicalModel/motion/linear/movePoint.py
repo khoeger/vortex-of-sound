@@ -48,11 +48,6 @@ graphPoints = np.fromfunction(
 
 graphPoints = graphPoints[0]      # For graphing purposes, and easy manipulation
                                   # Isolate's the column of steps
-"""
-print(initialPos, initialPos.shape)
-print(graphPoints.shape)
-print(graphPoints[:10])
-"""
 
 fig = plt.figure()
 ax = fig.add_subplot(111,
