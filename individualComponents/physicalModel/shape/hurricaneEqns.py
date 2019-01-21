@@ -34,3 +34,34 @@ def polarToX ( r , theta ):
 
 def polarToY ( r , theta ):
     return(r*np.sin(theta))
+
+class VortexShape():
+    """ Class that creates a basic Vortex object"""
+    def __init__(self,
+                n,
+                z_range,
+                scalingFactor,
+                r_range,
+                vertex,
+                point ):
+        #-- define constants
+        self.n = n
+        self.zRange = z_range
+        self.scalar = scalingFactor
+        self.rRange = r_range
+        self.v = vertex
+        self.pt = point
+    #-- Generate heights, thetas, p, radii
+    #def genPointInfo(self):
+        self.heights = chooseZ(self.zRange, self.n)
+        self.thetas = chooseTheta(self.n)
+        self.pVal = calculateP( self.pt, self.scalar)
+        self.maxR = maxRForZ( self.heights, self.v, self.pVal)
+        self.rs = chooseR(self.rRange[0], self.maxR)
+        self.x = polarToX(self.rs, self.thetas)
+        self.y = polarToY(self.rs, self.thetas)
+        self.z = self.heights
+        self.coords = np.array([self.x, self.y, self.z])
+        self.coordsT = self.coords.transpose()
+    def returnInitialVortex(self):
+        return(self.coordsT)
