@@ -65,3 +65,28 @@ class VortexShape():
         self.coordsT = self.coords.transpose()
     def returnInitialVortex(self):
         return(self.coordsT)
+
+class leveledVortexShape():
+    """ Create a leveled vortex """
+    def __init__(self,
+                n,
+                z_range,
+                scalingFactor,
+                r_range,
+                vertex,
+                point,
+                #num_levels,
+                level_proportions,
+                level_bottom_heights ):
+        #-- define constants
+        self.n = n
+        self.zRange = z_range
+        self.scalar = scalingFactor
+        self.rRange = r_range
+        self.v = vertex
+        self.pt = point
+        self.lProportions = level_proportions
+        self.bHeights = level_bottom_heights
+        self.nLevels = len(level_proportions)
+
+    #-- Generate heights, the
