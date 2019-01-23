@@ -11,10 +11,24 @@ r_range = [20, 100]                                 # width of outer reaches of 
 vertex = [r_range[0], z_range[1] * scalingFactor]   # vertex of outer reaches of vortex
 point = [r_range[1], z_range[1]]
 
-#-- Create Vortex Shape
+# # Generate heights, thetas, p, radii
+# heights = hurricaneEqns.chooseZ(z_range, n)
+# thetas = hurricaneEqns.chooseTheta(n)
+# p = hurricaneEqns.calculateP( point, scalingFactor)
+# maxR = hurricaneEqns.maxRForZ( heights, vertex, p)
+# rs = hurricaneEqns.chooseR(r_range[0], maxR)
+#
+# # in caretsian coordinages
+# x = hurricaneEqns.polarToX(rs, thetas)
+# y = hurricaneEqns.polarToY(rs, thetas)
+# z = heights
+# coords = np.array([x,y,z])
+# # Transpose coordinates
+# #coordsT = coords.transpose()
+
+# -- Generate Hurricane
 testV = hurricaneEqns.VortexShape(n, z_range, scalingFactor, r_range, vertex, point)
 coordsT = testV.returnInitialVortex()
-
 # -- Plot
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
