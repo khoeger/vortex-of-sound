@@ -52,7 +52,6 @@ class VortexShape():
         self.v = vertex
         self.pt = point
     #-- Generate heights, thetas, p, radii
-    #def genPointInfo(self):
         self.heights = chooseZ(self.zRange, self.n)
         self.thetas = chooseTheta(self.n)
         self.pVal = calculateP( self.pt, self.scalar)
@@ -70,18 +69,15 @@ class leveledVortexShape():
     """ Create a leveled vortex """
     def __init__(self,
                 n,
-                #z_range,
                 scalingFactor,
                 r_range,
                 vertex,
                 point,
-                #num_levels,
                 level_proportions,
                 level_bottom_heights,
-                level_top_heights ):
+                level_top_heights ) :
         #-- define constants
         self.n = n
-        #self.zRange = z_range
         self.scalar = scalingFactor
         self.rRange = r_range
         self.v = vertex
