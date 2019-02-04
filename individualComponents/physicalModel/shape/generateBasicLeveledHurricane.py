@@ -18,15 +18,22 @@ colorList = [   "xkcd:coral",
                 "xkcd:lime",
                 "xkcd:aqua",
                 "orchid"]
+legendLabels = [    "percussion",
+                    "walking bass",
+                    "chords",
+                    "melody",
+                    "harmony",
+                    "counterpoint"
+                    ]
 #random.shuffle(colorList)
 
 # Instrument % distribution breakdown
 percentages =   [   0.15, # percussion
-                    0.15, # chords
                     0.16, # basso continuo
-                    0.18, # counterpoint
+                    0.15, # chords
+                    0.2,   # melody
                     0.16, # harmony
-                    0.2   # melody
+                    0.18 # counterpoint
                 ]
 # melody = 0.3
 # percussion = 0.25
@@ -143,7 +150,7 @@ ax.set_xscale("linear")
 ax.set_yscale("linear")
 ax.set_zscale("linear")
 ax.set_zlim3d(bottom=0,top=15)
-ax.set_facecolor("black")
+#ax.set_facecolor("black")
 ax.relim()
 
 for levelNum in range(len(coordsArrayT)):
@@ -155,7 +162,8 @@ for levelNum in range(len(coordsArrayT)):
                     level[:,1], #y
                     level[:,2], #z
                     c=color,
-                    marker = "o"
+                    marker = "o",
+                    label = legendLabels[levelNum]
             )
 
 # ax.scatter( pcoordsT[:,0],#x ,
@@ -183,5 +191,5 @@ for levelNum in range(len(coordsArrayT)):
 #             cmcoordsT[:,2],
 #             c = "xkcd:aqua",
 #             marker = "o")
-
+plt.legend()
 plt.show()
