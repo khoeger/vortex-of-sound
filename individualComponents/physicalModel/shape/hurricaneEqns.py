@@ -70,23 +70,49 @@ class leveledVortexShape():
     """ Create a leveled vortex """
     def __init__(self,
                 n,
-                z_range,
+                #z_range,
                 scalingFactor,
                 r_range,
                 vertex,
                 point,
                 #num_levels,
                 level_proportions,
-                level_bottom_heights ):
+                level_bottom_heights,
+                level_top_heights ):
         #-- define constants
         self.n = n
-        self.zRange = z_range
+        #self.zRange = z_range
         self.scalar = scalingFactor
         self.rRange = r_range
         self.v = vertex
         self.pt = point
         self.lProportions = level_proportions
         self.bHeights = level_bottom_heights
+        self.tHeights = level_top_heights
         self.nLevels = len(level_proportions)
 
-    #-- Generate heights, the
+        # -- Generate heights, thetas, radius per  instrument
+    def generateValues(self):
+        self.p = calculateP( self.pt, self.scalar)
+
+        coords = []
+        for level in range(self.nLevels):
+            numLevelInstances = np.floor(self.lProportions[level] * self.n).astype(int)
+            levelThetas = chooseTheta(numLevelInstances)
+            levelZs = chooseZ([self.bHeights[level], self.tHeights[level]], numLevelInstances)
+            levelMaxRs = maxRForZ(levelZs, self.v, self.p)
+            levelRs = chooseR( self.rRange[0], levelMaxRs)
+
+            levelX = polarToX( levelRs , levelThetas )
+            levelY = polarToY( levelRs , levelThetas )
+            levelZ = levelZs
+
+            levelCoords = np.array([ levelX , levelY , levelZ ])
+            levelCoordsT = levelCoords.transpose()
+
+            coords.append(levelCoordsT)
+        self.coordsT = coords
+
+    def returnInitialVortex(self):
+        self.generateValues()
+        return(self.coordsT)
